@@ -13,11 +13,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
+      - name: Build and push
+        uses: docker/build-push-action@v3
         with:
-          ruby-version: .ruby-version
-          bundler-cache: true
+          push: true
+          tags: registry.heroku.com/runchronicle/web
+          provenance: false
 
       - name: Scan for common Rails security vulnerabilities using static analysis
         run: bin/brakeman --no-pager
